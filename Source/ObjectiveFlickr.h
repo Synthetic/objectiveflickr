@@ -67,7 +67,7 @@ extern NSString *const OFFlickrDeletePermission;
 
 // API endpoints
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
 @property (nonatomic, readonly) NSString *key;
 @property (nonatomic, readonly) NSString *sharedSecret;
 @property (nonatomic, retain) NSString *authToken;
@@ -114,12 +114,12 @@ extern NSString *const OFFlickrAPIRequestErrorDomain;
 enum {
 	// refer to Flickr API document for Flickr's own error codes
     OFFlickrAPIRequestConnectionError = 0x7fff0001,
-    OFFlickrAPIRequestTimeoutError = 0x7fff0002,    
+    OFFlickrAPIRequestTimeoutError = 0x7fff0002,
 	OFFlickrAPIRequestFaultyXMLResponseError = 0x7fff0003,
     
     OFFlickrAPIRequestOAuthError = 0x7fff0004,
-
-    OFFlickrAPIRequestUnknownError = 0x7fff0042    
+	
+    OFFlickrAPIRequestUnknownError = 0x7fff0042
 };
 
 extern NSString *const OFFlickrAPIRequestOAuthErrorUserInfoKey;
@@ -130,7 +130,7 @@ extern NSString *const OFFetchOAuthAccessTokenSession;
 
 @class OFFlickrAPIRequest;
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
 @protocol OFFlickrAPIRequestDelegate <NSObject>
 @optional
 #else
@@ -138,7 +138,7 @@ extern NSString *const OFFetchOAuthAccessTokenSession;
 #endif
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary;
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError;
-#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_4                
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(NSUInteger)inSentBytes totalBytes:(NSUInteger)inTotalBytes;
 #else
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(unsigned int)inSentBytes totalBytes:(unsigned int)inTotalBytes;
@@ -149,7 +149,7 @@ extern NSString *const OFFetchOAuthAccessTokenSession;
 
 @end
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
 typedef id<OFFlickrAPIRequestDelegate> OFFlickrAPIRequestDelegateType;
 #else
 typedef id OFFlickrAPIRequestDelegateType;
@@ -188,7 +188,7 @@ typedef id OFFlickrAPIRequestDelegateType;
 // image upload—we use NSInputStream here because we want to have flexibity; with this you can upload either a file or NSData from NSImage
 - (BOOL)uploadImageStream:(NSInputStream *)inImageStream suggestedFilename:(NSString *)inFilename MIMEType:(NSString *)inType arguments:(NSDictionary *)inArguments;
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
 @property (nonatomic, readonly) OFFlickrAPIContext *context;
 @property (nonatomic, assign) OFFlickrAPIRequestDelegateType delegate;
 @property (nonatomic, retain) id sessionInfo;

@@ -771,6 +771,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         case kCFStreamEventErrorOccurred:
             [request readStreamErrorOccurred];
             break;
+		default: break;
     }
     [pool drain];
 }

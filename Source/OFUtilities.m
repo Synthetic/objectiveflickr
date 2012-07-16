@@ -58,11 +58,11 @@ NSString *OFEscapedURLStringFromNSStringWithExtraEscapedChars(NSString *inStr, N
 {
 	CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)inStr, NULL, (CFStringRef)inEscChars, kCFStringEncodingUTF8);
     
-#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4	
-	return (NSString *)[(NSString*)escaped autorelease];			    
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
+	return (NSString *)[(NSString*)escaped autorelease];
 #else
-	return (NSString *)[NSMakeCollectable(escaped) autorelease];			    
-#endif    
+	return (NSString *)[NSMakeCollectable(escaped) autorelease];
+#endif
 }
 
 NSString *OFGenerateUUIDString()
@@ -71,11 +71,11 @@ NSString *OFGenerateUUIDString()
     CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
     CFRelease(uuid);
     
-#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4	
-	return (NSString *)[(NSString*)uuidStr autorelease];			    
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4 || TARGET_OS_IPHONE
+	return (NSString *)[(NSString*)uuidStr autorelease];
 #else
-	return (NSString *)[NSMakeCollectable(uuidStr) autorelease];			    
-#endif	
+	return (NSString *)[NSMakeCollectable(uuidStr) autorelease];
+#endif
 }
 
 static NSData *OFSha1(NSData *inData)
@@ -102,7 +102,7 @@ NSString *OFHMACSha1Base64(NSString *inKey, NSString *inMessage)
     
     if ([keyData length] < CC_SHA1_BLOCK_BYTES) {
         NSUInteger padSize = CC_SHA1_BLOCK_BYTES - [keyData length];
-
+		
         NSMutableData *paddedData = [NSMutableData dataWithData:keyData];
         [paddedData appendData:[NSMutableData dataWithLength:padSize]];
         keyData  = paddedData;
@@ -110,11 +110,11 @@ NSString *OFHMACSha1Base64(NSString *inKey, NSString *inMessage)
     
     NSMutableData *oKeyPad = [NSMutableData dataWithLength:CC_SHA1_BLOCK_BYTES];
     NSMutableData *iKeyPad = [NSMutableData dataWithLength:CC_SHA1_BLOCK_BYTES];
-
+	
     const uint8_t *kdPtr = [keyData bytes];
     uint8_t *okpPtr = [oKeyPad mutableBytes];
     uint8_t *ikpPtr = [iKeyPad mutableBytes];
-
+	
     memset(okpPtr, 0x5c, CC_SHA1_BLOCK_BYTES);
     memset(ikpPtr, 0x36, CC_SHA1_BLOCK_BYTES);
     
@@ -141,15 +141,15 @@ NSString *OFHMACSha1Base64(NSString *inKey, NSString *inMessage)
 	
 	NSString *result = [[[NSString alloc] initWithBytes:outputBuffer length:outputLength encoding:NSASCIIStringEncoding] autorelease];
 	free(outputBuffer);
-	return result;    
+	return result;
 }
 
 NSDictionary *OFExtractURLQueryParameter(NSString *inQuery)
 {
     if (![inQuery length]) {
-        return nil;        
+        return nil;
     }
-
+	
     NSArray *params = [inQuery componentsSeparatedByString:@"&"];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -254,10 +254,10 @@ static unsigned char base64EncodeLookup[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
 //	outputLength.
 //
 static char *NewBase64Encode(
-                      const void *buffer,
-                      size_t length,
-                      bool separateLines,
-                      size_t *outputLength)
+							 const void *buffer,
+							 size_t length,
+							 bool separateLines,
+							 size_t *outputLength)
 {
 	const unsigned char *inputBuffer = (const unsigned char *)buffer;
 	

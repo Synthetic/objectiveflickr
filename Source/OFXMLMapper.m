@@ -76,7 +76,7 @@ NSString *const OFXMLTextContentKey = @"_text";
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
 	NSMutableDictionary *mutableAttrDict = attributeDict ? [NSMutableDictionary dictionaryWithDictionary:attributeDict] : [NSMutableDictionary dictionary];
-
+	
 	// see if it's duplicated
 	id element = [currentDictionary objectForKey:elementName];
 	if (element) {
@@ -132,7 +132,7 @@ NSString *const OFXMLTextContentKey = @"_text";
 	NSString *existingContent = [currentDictionary objectForKey:OFXMLTextContentKey];
 	if (existingContent) {
 		NSString *newContent = [existingContent stringByAppendingString:string];
-		[currentDictionary setObject:newContent forKey:OFXMLTextContentKey];		
+		[currentDictionary setObject:newContent forKey:OFXMLTextContentKey];
 	}
 	else {
 		[currentDictionary setObject:string forKey:OFXMLTextContentKey];
