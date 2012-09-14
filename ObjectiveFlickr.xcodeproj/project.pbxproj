@@ -343,6 +343,7 @@
 				);
 				PRODUCT_NAME = ObjectiveFlickr;
 				RUN_CLANG_STATIC_ANALYZER = NO;
+				VALID_ARCHS = "i386 ppc ppc7400 ppc970 x86_64";
 			};
 			name = Debug;
 		};
@@ -370,6 +371,9 @@
 				);
 				PRODUCT_NAME = ObjectiveFlickr;
 				RUN_CLANG_STATIC_ANALYZER = NO;
+				VALID_ARCHS = "ppc64 i386 ppc ppc7400 ppc970 x86_64";
+				"VALID_ARCHS[sdk=*]" = "ppc64 i386 ppc ppc7400 ppc970 x86_64";
+				"VALID_ARCHS[sdk=macosx10.6]" = "i386 x86_64";
 			};
 			name = Release;
 		};
@@ -420,7 +424,6 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				VALID_ARCHS = "i386 ppc ppc7400 ppc970 x86_64";
 			};
 			name = Debug;
 		};
@@ -449,9 +452,6 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				VALID_ARCHS = "ppc64 i386 ppc ppc7400 ppc970 x86_64";
-				"VALID_ARCHS[sdk=*]" = "ppc64 i386 ppc ppc7400 ppc970 x86_64";
-				"VALID_ARCHS[sdk=macosx10.6]" = "i386 x86_64";
 			};
 			name = Release;
 		};
@@ -459,22 +459,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = ObjectiveFlickr;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -482,21 +478,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = ObjectiveFlickr;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv6 armv7";
 				ZERO_LINK = NO;
 			};
 			name = Release;
