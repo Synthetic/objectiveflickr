@@ -382,6 +382,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = All;
 			};
 			name = Debug;
@@ -475,6 +476,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = ObjectiveFlickr;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
